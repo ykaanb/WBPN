@@ -1,0 +1,341 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place c6;
+place c7;
+place c8;
+place c10;
+place c14;
+place c17;
+place c19;
+place c20;
+place c21;
+place c24;
+place c25;
+place c26;
+place c27;
+place c28;
+place c29;
+place c30;
+place c31;
+place c32;
+place c34;
+place c35;
+place c38;
+place c41;
+place c42;
+place c43;
+place c44;
+place c45;
+place c46;
+place c48;
+place c49;
+place c52;
+place c53;
+place c54;
+place c55;
+place c56;
+place c57;
+place c58;
+place c60;
+place c64;
+place c66;
+place c68;
+place c69;
+place c70;
+place c71;
+place Status12;
+place Status9;
+place Status;
+place Status2;
+place Status6;
+place Status8;
+place Status1;
+place Status7;
+place Status5;
+place Status14;
+place Status4;
+place client_on_trip__wait;
+place Status3;
+place Status10;
+place Status13;
+place Status11;
+
+trans file_closed
+  in  Status12
+  out Status9;
+
+trans return_permit_to_client
+  in  c24
+  out Status;
+
+trans check_with_client__make_appointment__OR_split__0
+  in  c10
+  out Status12;
+
+trans check_with_client__make_appointment__OR_split__1
+  in  c10
+  out Status13;
+
+trans END
+  in  Status9
+  out GLOBAL_END;
+
+trans send_notification
+  in  c6
+  out Status12;
+
+trans time_out1
+  in  Status
+  out c6;
+
+trans send_cheques_and_cash
+  in  c7
+  out c8;
+
+trans prepare_cheques_and_cash
+  in  c14
+  out c7;
+
+trans time_out2
+  in  client_on_trip__wait
+  out Status5;
+
+trans memo_negative__AND_Join_
+  in  c46, Status2
+  out c10;
+
+trans time_out3
+  in  Status7
+  out Status6;
+
+trans return_on_time
+  in  Status
+  out Status14;
+
+trans send_request_to_bank
+  in  c29
+  out c14;
+
+trans approve_schedule__OR_Split__0
+  in  c17
+  out Status1;
+
+trans approve_schedule__OR_Split__1
+  in  c17
+  out Status2;
+
+trans flight_schedule__business_
+  in  Status1
+  out c17;
+
+trans calculate_balance
+  in  Status6
+  out Status8;
+
+trans director_checks_0
+  in  Status8
+  out c19;
+
+trans director_checks_1
+  in  Status8
+  out c20;
+
+trans settle_balance
+  in  c20
+  out c21;
+
+trans deduct_costs_from_budget
+  in  c21
+  out Status9;
+
+trans send_info_to_FD
+  in  Status5
+  out Status7;
+
+trans give_client_permit
+  in  c48
+  out Status;
+
+trans check_permit_0
+  in  Status14
+  out c24;
+
+trans check_permit_1
+  in  Status14
+  out c25;
+
+trans make_appointment__mixed_trips_
+  in  c42
+  out c26;
+
+trans AND_Split1
+  in  c27
+  out c28, c29;
+
+trans memo_positive__AND_Join_
+  in  c58, Status2
+  out c27;
+
+trans client_pays_part
+  in  c26
+  out c30;
+
+trans book_hotels_and_local_transport__business_
+  in  Status4
+  out c32;
+
+trans prepare_vouchers__business_
+  in  c32
+  out c31;
+
+trans receive_declaration
+  in  Status7
+  out Status6;
+
+trans client_picks_up_documents__business_
+  in  c34
+  out c35;
+
+trans put_documents_together__AND_Join___business_
+  in  c8, c31
+  out c34;
+
+trans close_file__business
+  in  c35
+  out client_on_trip__wait;
+
+trans return_cheques_and_cash
+  in  client_on_trip__wait
+  out Status5;
+
+trans send_copy_to_F_D___AND_split_
+  in  c25
+  out Status1, c38;
+
+trans both_parties_pay__AND_Join_
+  in  c30, c52
+  out Status4;
+
+trans AND_Split2
+  in  c44
+  out c41, c42;
+
+trans priv_flights__relev_info_sent_OR_Split__0
+  in  c45
+  out c43;
+
+trans priv_flights__relev_info_sent_OR_Split__1
+  in  c45
+  out c44;
+
+trans determine_costs_business_private
+  in  c28
+  out c45;
+
+trans send_memo__negative___AND_Split_
+  in  c54
+  out c46;
+
+trans does_client_have_permit___OR_Split__0
+  in  c49
+  out Status14;
+
+trans does_client_have_permit___OR_Split__1
+  in  c49
+  out c48;
+
+trans check_time_business_0
+  in  c55
+  out c49;
+
+trans check_time_business_1
+  in  c55
+  out Status12;
+
+trans make_corrections
+  in  c19
+  out Status8;
+
+trans uni_pays_bus__flights__AND_Join_
+  in  c41, Status3
+  out c52;
+
+trans check_allowence___send_memo__OR_split__0
+  in  c38
+  out c53;
+
+trans check_allowence___send_memo__OR_split__1
+  in  c38
+  out c54;
+
+trans register_information__OR_Split__0
+  in  GLOBAL_START
+  out c55;
+
+trans register_information__OR_Split__1
+  in  GLOBAL_START
+  out c56;
+
+trans send_memo__positive___AND_Split_
+  in  c53
+  out c57, c58;
+
+trans advance_payment
+  in  c57
+  out c60;
+
+trans pay_fees
+  in  c60
+  out Status3;
+
+trans university_pays_all
+  in  c43, Status3
+  out Status4;
+
+trans check_time_private_0
+  in  c56
+  out Status10;
+
+trans check_time_private_1
+  in  c56
+  out Status11;
+
+trans flight_schedule__private_
+  in  Status10
+  out c64;
+
+trans approve_schedule__private___OR_Split__0
+  in  c64
+  out Status10;
+
+trans approve_schedule__private___OR_Split__1
+  in  c64
+  out c66;
+
+trans make_appointment__private_
+  in  c66
+  out Status13;
+
+trans book_hotels_and_local_transportation__private_
+  in  c68
+  out c69;
+
+trans client_pays_all_
+  in  Status13
+  out c68;
+
+trans prepare_vouchers__private_
+  in  c69
+  out c70;
+
+trans put_documents_together__private_
+  in  c70
+  out c71;
+
+trans client_picks_up_documents__private_
+  in  c71
+  out Status11;
+
+trans close_file
+  in  Status11
+  out Status9;

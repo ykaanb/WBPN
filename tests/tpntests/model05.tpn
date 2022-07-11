@@ -1,0 +1,267 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place Status;
+place Prive;
+place Vluchtschema_in_orde;
+place Status1;
+place Start;
+place Permit_in_order;
+place Status16;
+place Status22;
+place Status18;
+place Status23;
+place Business;
+place Fout;
+place Status17;
+place Status21;
+place Wel_permit;
+place Status34;
+place Status26;
+place Status35;
+place Te_laat;
+place Status27;
+place Status24;
+place Status36;
+place Status20;
+place Status2;
+place Status33;
+place Status19;
+place Goed2;
+place Status31;
+place Status25;
+place Status30;
+place GOED;
+place Status32;
+place Status29;
+place Geen_permit;
+place Einde;
+place Status14;
+place Status11;
+place Status15;
+place Status13;
+place Status12;
+place Status8;
+place Status9;
+place Status5;
+place Status10;
+place Status6;
+place Status4;
+place Status7;
+place Status3;
+place Betaald;
+
+trans Bellen_klant_Status0
+  in  Status1
+  out Status;
+
+trans Noteren_wensen
+  in  Prive
+  out Status;
+
+trans Maken_vluchtschema
+  in  Status
+  out Status1;
+
+trans Bellen_klant_in_orde
+  in  Status1
+  out Vluchtschema_in_orde;
+
+trans Maak_file_Prive
+  in  Start
+  out Prive;
+
+trans Afspreken_betaling
+  in  Vluchtschema_in_orde
+  out Status2;
+
+trans Checken_permit_1_in_orde
+  in  Wel_permit
+  out Permit_in_order;
+
+trans Birth
+  in  GLOBAL_START
+  out Start;
+
+trans And_split_2
+  in  Permit_in_order
+  out Status16, Status18;
+
+trans Filen_permit
+  in  Status16
+  out Status17;
+
+trans Telefoneren_naar_klant_in_orde
+  in  Fout
+  out Vluchtschema_in_orde;
+
+trans Checken_permit_1_Te_laat
+  in  Wel_permit
+  out Te_laat;
+
+trans Kopieren_file
+  in  Status21
+  out Status22;
+
+trans Checken_permit_2
+  in  Status22
+  out Status23;
+
+trans Ontvangen_memo_Fout
+  in  Status27
+  out Fout;
+
+trans Vragen_om_permit_Wel
+  in  Business
+  out Wel_permit;
+
+trans Telefoneren_naar_klant_Einde
+  in  Fout
+  out Einde;
+
+trans Maak_file_Business
+  in  Start
+  out Business;
+
+trans Klaarmaken_cash_cheq
+  in  Status34
+  out Status35;
+
+trans Opsturen_naar_fin__dep_
+  in  Status18
+  out Status19;
+
+trans Maken_Vluchtschema
+  in  Status24
+  out Status25;
+
+trans Opsturen_cash_cheq_
+  in  Status35
+  out Status36;
+
+trans And_join_4
+  in  Status36, Status32
+  out Status2;
+
+trans And_join_3
+  in  Status23, GOED
+  out Status26;
+
+trans Ontvangen_geld
+  in  Status2
+  out Betaald;
+
+trans Maken_memo
+  in  Status26
+  out Status27;
+
+trans And_join_2
+  in  Status17, Status19
+  out Status20;
+
+trans And_split_3
+  in  Status20
+  out Status24, Status21;
+
+trans Verzoeken_bank
+  in  Status33
+  out Status34;
+
+trans Invullen
+  in  Geen_permit
+  out Wel_permit;
+
+trans Bank_doet_betalen
+  in  Status31
+  out Status32;
+
+trans Bepalen_kosten
+  in  Status29
+  out Status30;
+
+trans Bellen_Klant_
+  in  Status25
+  out Status24, GOED;
+
+trans Opsturen_kostenplaatje
+  in  Status30
+  out Status31;
+
+trans And_split_4
+  in  Goed2
+  out Status29, Status33;
+
+trans Ontvangen_memo_Goed
+  in  Status27
+  out Goed2;
+
+trans Check_permit_Geen
+  in  Wel_permit
+  out Geen_permit;
+
+trans Vragen_om_permit_Geen
+  in  Business
+  out Geen_permit;
+
+trans Death
+  in  Einde
+  out GLOBAL_END;
+
+trans notificatie_sturen
+  in  Te_laat
+  out Einde;
+
+trans declaratie_te_laat
+  in  Status8
+  out Status11;
+
+trans And_join_1
+  in  Status11, Status10
+  out Status12;
+
+trans Goedkeuren_balans
+  in  Status12
+  out Status13;
+
+trans Aanpassen_maand_salaris
+  in  Status13
+  out Status14;
+
+trans Berekenen_totale_kosten
+  in  Status14
+  out Status15;
+
+trans Aftrekken_budget
+  in  Status15
+  out Einde;
+
+trans declaratie_op_tijd
+  in  Status8
+  out Status11;
+
+trans Incasseren_geld_cheques
+  in  Status7
+  out Status9;
+
+trans Sturen_naar_financ__dep_
+  in  Status9
+  out Status10;
+
+trans Printen
+  in  Status3
+  out Status4;
+
+trans Samenvoegen
+  in  Status4
+  out Status5;
+
+trans Overhandigen_Tickets
+  in  Status5
+  out Status6;
+
+trans And_split_1
+  in  Status6
+  out Status7, Status8;
+
+trans Reserveren_boeken
+  in  Betaald
+  out Status3;

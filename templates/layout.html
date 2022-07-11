@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="KaanB">
+    <meta name="description" content="A petrinet visualiser for .tpn, .pnml, .bpmn files">
+    <title>Petri net Visualizer</title>
+    {% assets 'css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+</head>
+
+<body class="bg-gray-100 ">
+    <div class="container w-full mx-auto px-4 md:px-6 pt-5">
+        <div class="w-full text-xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
+            <h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-2xl md:text-4xl">
+                Petri net Visualizer
+            </h1>
+        </div>
+        {% block content %}{% endblock %}
+
+        <footer>
+            <p> {{ year }} </p>
+        </footer>
+    </div>
+
+    
+    
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place Private;
+place Toestand11;
+place Approved;
+place Toestand12;
+place Flight_schedule;
+place paid;
+place c1;
+place begin;
+place Not_OK;
+place c2;
+place Neg;
+place Business;
+place client_checked;
+place END_;
+place OK;
+place c3;
+place info_filed;
+place Prepared;
+place Toestand1;
+place bank;
+place Toestand6;
+place Toestand14;
+place Pos;
+place Toestand16;
+place fd_paid;
+place O;
+place TA;
+place Toestand;
+place approved;
+place schedule_made;
+place yes;
+place bankinfo;
+place Travelling;
+place ok;
+place Toestand5;
+place Toestand10;
+place Toestand3;
+place Toestand8;
+place Toestand9;
+
+trans Call_client_to_approve_I
+  in  Flight_schedule
+  out Approved;
+
+trans Arrangements_to_pay_and_pay
+  in  Approved
+  out paid;
+
+trans start_booking
+  in  paid
+  out Toestand11;
+
+trans prep__doc
+  in  Toestand11
+  out Toestand12;
+
+trans give_documents_
+  in  Toestand12
+  out END_;
+
+trans Make_flight_schedule
+  in  Private
+  out Flight_schedule;
+
+trans Call_client_to_approve_II
+  in  Flight_schedule
+  out Private;
+
+trans OR_split_I
+  in  c1
+  out Private;
+
+trans Send_travel_permit_back
+  in  Not_OK
+  out c2;
+
+trans Birth
+  in  GLOBAL_START
+  out begin;
+
+trans Register_info
+  in  begin
+  out c1;
+
+trans OR_split_II
+  in  c1
+  out Business;
+
+trans Send_notification
+  in  c2
+  out END_;
+
+trans Hand_out_blanc_form
+  in  Not_OK
+  out c2;
+
+trans in_time
+  in  c2
+  out Business;
+
+trans OR__split_I
+  in  c3
+  out Neg;
+
+trans Call_client_for_trip_I
+  in  Neg
+  out Private;
+
+trans Check
+  in  Business
+  out OK, Not_OK;
+
+trans Death
+  in  END_
+  out GLOBAL_END;
+
+trans File_travel_permit
+  in  OK
+  out info_filed;
+
+trans Check_client_by_FD
+  in  info_filed
+  out client_checked;
+
+trans send_memo
+  in  client_checked
+  out c3;
+
+trans OR__split_II
+  in  c3
+  out Pos;
+
+trans Call_client_for_trip_II
+  in  Neg
+  out END_;
+
+trans prepare_docu
+  in  Toestand6, O
+  out Toestand1;
+
+trans send_request_cheques_and_cash
+  in  bank
+  out Prepared;
+
+trans Receive_from_bank
+  in  Prepared
+  out Toestand6;
+
+trans too_late
+  in  Toestand1
+  out END_;
+
+trans give_documents
+  in  Toestand1
+  out Travelling;
+
+trans Partly_business_I
+  in  Toestand16
+  out O;
+
+trans fd_makes_advanced_payments
+  in  Toestand14
+  out fd_paid;
+
+trans fd_pays_detailed_prices
+  in  fd_paid, Toestand
+  out Toestand16;
+
+trans AND_split
+  in  Pos
+  out bank, Toestand14, TA;
+
+trans Partly_business_II
+  in  Toestand16
+  out yes;
+
+trans call_client_I
+  in  schedule_made
+  out TA;
+
+trans Client_pays
+  in  yes
+  out O;
+
+trans make_flight_schedule
+  in  TA
+  out schedule_made;
+
+trans start_booking_
+  in  approved
+  out Toestand;
+
+trans call_client_II
+  in  schedule_made
+  out approved;
+
+trans no_declaration
+  in  Toestand3
+  out Toestand5;
+
+trans Settle_with_salary
+  in  ok
+  out Toestand10;
+
+trans deduct_money_from_budget
+  in  Toestand10
+  out END_;
+
+trans Client_back
+  in  Travelling
+  out Toestand3, bankinfo;
+
+trans Collect_info
+  in  bankinfo, Toestand5
+  out Toestand8;
+
+trans Check_balance_II
+  in  Toestand9
+  out ok;
+
+trans Check_balance_I
+  in  Toestand9
+  out Toestand8;
+
+trans Process_declaration
+  in  Toestand3
+  out Toestand5;
+
+trans Balance
+  in  Toestand8
+  out Toestand9;

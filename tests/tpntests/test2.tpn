@@ -1,0 +1,8 @@
+place #p1_p1;
+place #p2_p2;
+place #p3_p3;
+place #p4_p4;
+place #p5_p5;
+trans #t1 in #p1_p1 out #p2_p2;
+trans #t2_op_1 in #p2_p2 out #p3_p3 #p4_p4;
+trans #t3 in #p3_p3 #p4_p4 out #p5_p5;

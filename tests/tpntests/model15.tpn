@@ -1,0 +1,300 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place Status2;
+place Private2;
+place Status18;
+place Status15;
+place Private;
+place p;
+place Status17;
+place Status6;
+place Private_3;
+place Status7;
+place Status;
+place File;
+place Status1;
+place End;
+place Status9;
+place Status32;
+place Wrong;
+place Status11;
+place Status13;
+place Status24;
+place Status12;
+place filled_out_form;
+place Business2;
+place Status5;
+place Oke;
+place No2;
+place Status10;
+place Business;
+place Business_3;
+place No;
+place Status8;
+place b;
+place Status30;
+place Status4;
+place Status31;
+place Status28;
+place Status3;
+place Status19;
+place Status29;
+place Positief;
+place Copy;
+place Status20;
+place Status27;
+place Negatief;
+place Status21;
+place Status14;
+place Status22;
+place Status25;
+place Status26;
+place Status16;
+
+trans Send_not
+  in  Status1
+  out Status2;
+
+trans Close_2
+  in  Status2
+  out End;
+
+trans Make_app
+  in  Private2
+  out Status15;
+
+trans Pay
+  in  Status15
+  out Status18;
+
+trans Book_18
+  in  Status18
+  out Status32;
+
+trans Register_wishes
+  in  Private
+  out Status17;
+
+trans Check_b_p_p
+  in  Status32
+  out p;
+
+trans Put_docs
+  in  p
+  out Status24;
+
+trans prepare_flight_schedule_Status17
+  in  Status17
+  out Status6;
+
+trans B_P_Private
+  in  Status7
+  out Private2;
+
+trans Register_info_Private
+  in  Status
+  out Private;
+
+trans Birth
+  in  GLOBAL_START
+  out Status;
+
+trans Death
+  in  End
+  out GLOBAL_END;
+
+trans Call_client_Yes
+  in  Status6
+  out Status7;
+
+trans Activity_p
+  in  p
+  out Status24;
+
+trans Pick_up_P
+  in  Status24
+  out Private_3;
+
+trans prepare_flight_schedule_File
+  in  File
+  out Status6;
+
+trans Return_to_client
+  in  Wrong
+  out Status1;
+
+trans Receive_form
+  in  Status1
+  out filled_out_form;
+
+trans Close_P
+  in  Private_3
+  out End;
+
+trans B_P_Business
+  in  Status7
+  out Business2;
+
+trans Call_client_No
+  in  Status6
+  out No2;
+
+trans Pay_2
+  in  Status12
+  out Status13;
+
+trans Book_13
+  in  Status13
+  out Status32;
+
+trans Det_P_costs
+  in  Status9
+  out Status11;
+
+trans Check_permit_Wrong
+  in  filled_out_form
+  out Wrong;
+
+trans Register_info_Business
+  in  Status
+  out Business;
+
+trans Make_app_2
+  in  Status11
+  out Status12;
+
+trans File_permit____
+  in  Oke
+  out File, Copy;
+
+trans Pick_up_B
+  in  Status24
+  out Business_3;
+
+trans Det_B_costs
+  in  Status10
+  out Status5;
+
+trans prepare_flight_schedule_No
+  in  No2
+  out Status6;
+
+trans Det_costs
+  in  Business2, Status8
+  out Status9, Status10;
+
+trans Check_permit_Oke
+  in  filled_out_form
+  out Oke;
+
+trans Check_for_filled_out_permit_Yes
+  in  Business
+  out filled_out_form;
+
+trans Activity_b
+  in  b
+  out Status24;
+
+trans Dec_late_B
+  in  Business_3
+  out Status30;
+
+trans Give_blank_paper
+  in  No
+  out filled_out_form;
+
+trans Check_for_filled_out_form_No
+  in  Business
+  out No;
+
+trans Check_b_p_b
+  in  Status32
+  out b;
+
+trans Close_31
+  in  Status31
+  out End;
+
+trans Put_docs_2
+  in  b, Status22
+  out Status24;
+
+trans Call_explain_Private
+  in  Business2, Status14
+  out Private2;
+
+trans Settle
+  in  Status29
+  out Status30;
+
+trans Positief_memo
+  in  Positief
+  out Status3, Status8, Status20;
+
+trans Pay_flighttickets
+  in  Status4
+  out Status19;
+
+trans Deduct
+  in  Status30
+  out Status31;
+
+trans Book_19
+  in  Status19
+  out Status32;
+
+trans Check_allowed_Pos
+  in  Copy
+  out Positief;
+
+trans Make_adv_payment
+  in  Status3, Status5
+  out Status4;
+
+trans Approve_27
+  in  Status28
+  out Status27;
+
+trans Approve_29
+  in  Status28
+  out Status29;
+
+trans Check_allowed_Neg
+  in  Copy
+  out Negatief;
+
+trans Call_explain_End
+  in  Business2, Status14
+  out Status16;
+
+trans Send_request
+  in  Status20
+  out Status21;
+
+trans Prepare_cash
+  in  Status21
+  out Status26, Status22;
+
+trans Process_dec
+  in  Status25, Business_3
+  out Status27;
+
+trans Calc_bal
+  in  Status27
+  out Status28;
+
+trans Negatief_memo
+  in  Negatief
+  out Status14;
+
+trans Dec_late_25
+  in  Status25
+  out Status30;
+
+trans Send_info
+  in  Status26
+  out Status25;
+
+trans Close_16
+  in  Status16
+  out End;

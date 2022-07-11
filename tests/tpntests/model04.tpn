@@ -1,0 +1,430 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place Creditcard;
+place Approved;
+place Booked;
+place Arrangement_Payed;
+place Printed_Vouchers;
+place F_S_;
+place Paid;
+place Private;
+place Cash;
+place Start;
+place Einde;
+place Too_Late_3;
+place Filed;
+place Prepared_Flights;
+place Business;
+place Approved__2_;
+place Sent;
+place Payed__2_;
+place Good;
+place no;
+place AS2;
+place No;
+place called;
+place booked2;
+place AS1;
+place printed3;
+place made2;
+place received;
+place cash3;
+place Yes;
+place Memo;
+place payed2;
+place Bad;
+place creditcard3;
+place Checked;
+place Positive;
+place yes;
+place put_together3;
+place Toestand5;
+place prepared2;
+place Negative;
+place sent_back;
+place send;
+place Toestand6;
+place Toestand7;
+place printed2;
+place None_private_costs;
+place Still_plan;
+place det2;
+place hotels_booked;
+place Payed_in_Advance;
+place Printed;
+place Private_Costs;
+place cash2;
+place det1;
+place booked3;
+place made;
+place No_Fee;
+place creditcard2;
+place arrangement_made;
+place payed3;
+place Flight_payed;
+place Fee;
+place cash;
+place Toestand1;
+place Processed;
+place Toestand3;
+place Received;
+place Declaration_Approved;
+place creditcard;
+place payed;
+place Toestand;
+place Toestand2;
+place Toestand4;
+place printed;
+place booked;
+
+trans Approval_I
+  in  F_S_
+  out Approved;
+
+trans Approval_II
+  in  F_S_
+  out Private;
+
+trans Make_Pay_Arrangement
+  in  Approved
+  out Arrangement_Payed;
+
+trans How_to_Pay__I
+  in  Arrangement_Payed
+  out Creditcard;
+
+trans Pay_with_Card
+  in  Creditcard
+  out Paid;
+
+trans Print_Vouchers
+  in  Booked
+  out Printed_Vouchers;
+
+trans Put_Together
+  in  Printed_Vouchers
+  out Einde;
+
+trans Prepare_Flight_Schedule
+  in  Private
+  out F_S_;
+
+trans How_to_Pay__II
+  in  Arrangement_Payed
+  out Cash;
+
+trans Pay_Cash
+  in  Cash
+  out Paid;
+
+trans Book_Hotel_etc_
+  in  Paid
+  out Booked;
+
+trans Registreer_I
+  in  Start
+  out Private;
+
+trans Birth
+  in  GLOBAL_START
+  out Start;
+
+trans Too_Late
+  in  Business
+  out Too_Late_3;
+
+trans Send_Notification
+  in  Too_Late_3
+  out Einde;
+
+trans Death
+  in  Einde
+  out GLOBAL_END;
+
+trans Ckeck_Permit_II
+  in  No
+  out Good;
+
+trans File_Permit
+  in  Good
+  out Filed;
+
+trans Send_Copy
+  in  Filed
+  out Sent;
+
+trans AND_Split
+  in  Sent
+  out AS1, AS2;
+
+trans Blank_Permit_II
+  in  Business
+  out No;
+
+trans Prepare_Flights
+  in  AS2
+  out Prepared_Flights;
+
+trans Approved_II
+  in  Prepared_Flights
+  out Approved__2_;
+
+trans Make_a_Pay_Arrangement
+  in  Approved__2_
+  out Payed__2_;
+
+trans allowed_I
+  in  Payed__2_, Memo
+  out no;
+
+trans call_client_I
+  in  no
+  out received;
+
+trans Registreer_II
+  in  Start
+  out Business;
+
+trans Ckeck_Permit_I
+  in  No
+  out Bad;
+
+trans Approved__I
+  in  Prepared_Flights
+  out AS2;
+
+trans call_client_II
+  in  no
+  out called;
+
+trans make_pay_arrangement
+  in  called
+  out made2;
+
+trans how_to_pay__I
+  in  made2
+  out cash3;
+
+trans pay4
+  in  cash3
+  out payed2;
+
+trans print2
+  in  booked2
+  out printed3;
+
+trans put_together
+  in  printed3
+  out received;
+
+trans AND_join2
+  in  received, Toestand4
+  out Einde;
+
+trans Blank_Permit__I
+  in  Business
+  out Yes;
+
+trans book_hotel_etcetera
+  in  payed2
+  out booked2;
+
+trans Give_Blank_Permit
+  in  Yes
+  out Business;
+
+trans allowed_II
+  in  Memo, Payed__2_
+  out yes;
+
+trans how_to_pay_II
+  in  made2
+  out creditcard3;
+
+trans Check_Allowance___Send_Memo
+  in  AS1
+  out Memo, Checked;
+
+trans Return_to_Client
+  in  Bad
+  out Business;
+
+trans pay5
+  in  creditcard3
+  out payed2;
+
+trans Positive_Negative
+  in  Checked
+  out Positive, Negative;
+
+trans Make_Advance_Payment
+  in  Positive
+  out Payed_in_Advance;
+
+trans Send_back
+  in  prepared2
+  out sent_back;
+
+trans put_together2
+  in  sent_back, printed2
+  out put_together3;
+
+trans receive_money
+  in  put_together3
+  out received, Toestand7;
+
+trans and_split
+  in  yes
+  out Toestand5, Toestand6;
+
+trans Call_Client_II
+  in  Negative
+  out Still_plan;
+
+trans Send_request
+  in  Toestand5
+  out send;
+
+trans prepare_cash_and_travel_cheques
+  in  send
+  out prepared2;
+
+trans no_money
+  in  put_together3
+  out Toestand7, received;
+
+trans Print_vochers2
+  in  hotels_booked
+  out printed2;
+
+trans Determine_costs
+  in  Toestand6
+  out det2, det1;
+
+trans Determine_Private_Costs_I
+  in  det2
+  out None_private_costs;
+
+trans Book_hotels
+  in  None_private_costs
+  out hotels_booked;
+
+trans how_pay__I
+  in  made
+  out cash2;
+
+trans pay3
+  in  cash2
+  out payed3;
+
+trans Fee__II
+  in  Payed_in_Advance
+  out No_Fee;
+
+trans Print
+  in  booked3
+  out Printed;
+
+trans Put_together2
+  in  Printed
+  out None_private_costs;
+
+trans Make_Pay_Arrangement__2_
+  in  Still_plan
+  out arrangement_made;
+
+trans Determine_Private_Costs_II
+  in  det2
+  out Private_Costs;
+
+trans Make_pay_arrangements
+  in  Private_Costs
+  out made;
+
+trans Pay_Flight
+  in  No_Fee, det1
+  out Flight_payed;
+
+trans how_pay__II
+  in  made
+  out creditcard2;
+
+trans Book_Hotel_etc
+  in  payed3
+  out booked3;
+
+trans Fee__I
+  in  Payed_in_Advance
+  out Fee;
+
+trans or_split_II
+  in  arrangement_made
+  out cash;
+
+trans pay_creditcard
+  in  creditcard2
+  out payed3;
+
+trans Pay_Fee
+  in  Fee
+  out No_Fee;
+
+trans Receive_declaration
+  in  Flight_payed
+  out Received;
+
+trans Process_declaration
+  in  Toestand7, Received
+  out Processed;
+
+trans Approve__II
+  in  Processed
+  out Declaration_Approved;
+
+trans AND_Split2
+  in  Declaration_Approved
+  out Toestand1, Toestand;
+
+trans Settle_with_salary
+  in  Toestand1
+  out Toestand3;
+
+trans or_split_I
+  in  arrangement_made
+  out creditcard;
+
+trans pay2
+  in  cash
+  out payed;
+
+trans Approve__I
+  in  Processed
+  out Received;
+
+trans AND_join
+  in  Toestand2, Toestand3
+  out Toestand4;
+
+trans pay
+  in  creditcard
+  out payed;
+
+trans Deduct_from_travel_budget
+  in  Toestand
+  out Toestand2;
+
+trans Call_Client_I
+  in  Negative
+  out Toestand4;
+
+trans boke_hotels
+  in  payed
+  out booked;
+
+trans print_vouchers
+  in  booked
+  out printed;
+
+trans put_Together
+  in  printed
+  out Toestand4;

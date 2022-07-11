@@ -1,0 +1,541 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place c23;
+place S16;
+place S18;
+place S17;
+place S2a;
+place S23;
+place S22;
+place S5;
+place S15;
+place S14;
+place S22a;
+place S4;
+place S1;
+place S2;
+place S24;
+place S101;
+place S26;
+place S25;
+place S27;
+place S60;
+place S31;
+place S61;
+place S28;
+place S63;
+place S32;
+place S30;
+place S34;
+place S29;
+place S33;
+place S84b;
+place S48;
+place S100;
+place S35;
+place S39;
+place S37;
+place S40;
+place S3;
+place S41;
+place S51;
+place S42;
+place S48a;
+place S82d;
+place S57;
+place S38;
+place S36;
+place S83;
+place S84a;
+place S82b;
+place S99;
+place S49;
+place S84;
+place S47;
+place S44;
+place S46;
+place S98;
+place S82c;
+place S44a;
+place S82a;
+place S80;
+place S79;
+place S77ac;
+place S82;
+place S54;
+place S52;
+place S55;
+place S45;
+place S81;
+place S97;
+place S77a;
+place S77ab;
+place S94;
+place S85;
+place S88;
+place S56;
+place S89;
+place S77c;
+place S90;
+place S78;
+place S87;
+place S59;
+place S69a;
+place S68;
+place S75;
+place S65;
+place S69;
+place S91;
+place S92;
+place S77b;
+place S77;
+place S96;
+place S73;
+place S76;
+place S67;
+place S72;
+place S93;
+place S66;
+place S74;
+place S71;
+place S70;
+
+trans A8
+  in  S16
+  out S17;
+
+trans A10
+  in  S17
+  out S18;
+
+trans A11
+  in  S18
+  out S2a;
+
+trans A9
+  in  S17
+  out S22;
+
+trans A15
+  in  S23
+  out S17;
+
+trans A14_I
+  in  S22a
+  out S23;
+
+trans A13_I
+  in  S22
+  out S22a;
+
+trans A7_I
+  in  S14
+  out S16;
+
+trans A2_I
+  in  S2
+  out S5;
+
+trans A6_I
+  in  S5
+  out S14;
+
+trans Birth
+  in  GLOBAL_START
+  out S1;
+
+trans A6_II
+  in  S4
+  out S14;
+
+trans A2_II
+  in  S2
+  out S4;
+
+trans A1
+  in  S1
+  out S2;
+
+trans A7_II
+  in  S14
+  out S15;
+
+trans A13_II
+  in  S15
+  out S22a;
+
+trans A14_II
+  in  S22a
+  out S24;
+
+trans A84_I
+  in  S2a
+  out S101;
+
+trans A2_III
+  in  S2
+  out S3;
+
+trans A16
+  in  S24
+  out S25;
+
+trans A84_II
+  in  S63
+  out S101;
+
+trans Death
+  in  S101
+  out GLOBAL_END;
+
+trans A17
+  in  S25
+  out S26;
+
+trans A18
+  in  S26
+  out S27;
+
+trans A84_III
+  in  S84b
+  out S101;
+
+trans A19
+  in  S27
+  out S28, S48;
+
+trans A36_I
+  in  S32
+  out S34;
+
+trans A84_IV
+  in  S100
+  out S101;
+
+trans A31_I
+  in  S61
+  out S63;
+
+trans A36_II
+  in  S32
+  out S33;
+
+trans A33
+  in  S29
+  out S30;
+
+trans A35
+  in  S31
+  out S32;
+
+trans A34
+  in  S30
+  out S31;
+
+trans A29
+  in  S34, S57
+  out S60, c23;
+
+trans A30
+  in  c23, S60
+  out S61;
+
+trans A32
+  in  S28
+  out S29;
+
+trans A31_II
+  in  S61
+  out S52;
+
+trans A22_II
+  in  S51
+  out S57;
+
+trans A19a_I
+  in  S48
+  out S48a;
+
+trans A37
+  in  S33
+  out S37, S35, S36;
+
+trans A28
+  in  S35, S57
+  out S59;
+
+trans A38
+  in  S37
+  out S38;
+
+trans A39
+  in  S38
+  out S39;
+
+trans A40
+  in  S39
+  out S40;
+
+trans A21_II
+  in  S49
+  out S51;
+
+trans A41
+  in  S40
+  out S41;
+
+trans A42
+  in  S41
+  out S42;
+
+trans A64b
+  in  S42, S82b
+  out S82d;
+
+trans A65b
+  in  S84
+  out S84b;
+
+trans A21_I
+  in  S49
+  out S48a;
+
+trans A64c_I
+  in  S82d
+  out S83;
+
+trans A69_I
+  in  S84a
+  out S99;
+
+trans A22_I
+  in  S51
+  out S52;
+
+trans A19a_II
+  in  S3
+  out S48a;
+
+trans A83_I
+  in  S98
+  out S100;
+
+trans A83_II
+  in  S99
+  out S100;
+
+trans A65
+  in  S83
+  out S84;
+
+trans A65a
+  in  S84
+  out S84a;
+
+trans A20
+  in  S48a
+  out S49;
+
+trans A45_I
+  in  S44a
+  out S46;
+
+trans A59a_II
+  in  S47
+  out S77a;
+
+trans A64c_II
+  in  S82c
+  out S83;
+
+trans A69_II
+  in  S84a
+  out S85;
+
+trans A64
+  in  S80, S82
+  out S82a;
+
+trans A37a
+  in  S36
+  out S44;
+
+trans A44
+  in  S44, S76
+  out S44a;
+
+trans A64a_I
+  in  S82a
+  out S82b;
+
+trans A47
+  in  S46
+  out S47;
+
+trans A59a_I
+  in  S47
+  out S77ac;
+
+trans A62
+  in  S79
+  out S80;
+
+trans A45_II
+  in  S44a
+  out S45;
+
+trans A82
+  in  S97
+  out S98;
+
+trans A64a_II
+  in  S82a
+  out S82c;
+
+trans A24
+  in  S52
+  out S54;
+
+trans A25
+  in  S54
+  out S55;
+
+trans A46
+  in  S45
+  out S46;
+
+trans A63
+  in  S81
+  out S82;
+
+trans A59c
+  in  S77ac, S77ab
+  out S77c;
+
+trans A61
+  in  S78
+  out S81, S79;
+
+trans A74
+  in  S88
+  out S89;
+
+trans A59b_I
+  in  S56
+  out S77ab;
+
+trans A51_I
+  in  S59
+  out S65;
+
+trans A73
+  in  S87
+  out S88;
+
+trans A75
+  in  S89
+  out S90;
+
+trans A76
+  in  S90
+  out S91;
+
+trans A77_II
+  in  S91
+  out S92;
+
+trans A77_I
+  in  S94
+  out S92;
+
+trans A81
+  in  S96
+  out S97;
+
+trans A26
+  in  S55
+  out S56;
+
+trans A72
+  in  S85
+  out S87;
+
+trans A59_II
+  in  S77a
+  out S77;
+
+trans A52
+  in  S65
+  out S68, S67;
+
+trans A53a
+  in  S69
+  out S52, S69a;
+
+trans A58
+  in  S69a, S73
+  out S75;
+
+trans A53
+  in  S68
+  out S69;
+
+trans A59b_II
+  in  S56
+  out S77b;
+
+trans A51_II
+  in  S59
+  out S66;
+
+trans A74a
+  in  S88
+  out S89;
+
+trans A79
+  in  S93
+  out S96, S94;
+
+trans A59_I
+  in  S77c
+  out S77;
+
+trans A60
+  in  S77
+  out S78;
+
+trans A56
+  in  S72
+  out S76;
+
+trans A58a
+  in  S75, S74
+  out S72;
+
+trans A78
+  in  S92
+  out S93;
+
+trans A57_I
+  in  S71
+  out S73;
+
+trans A54_I
+  in  S67
+  out S70;
+
+trans A55
+  in  S70
+  out S71;
+
+trans A59_III
+  in  S77b
+  out S77;
+
+trans A54_II
+  in  S66
+  out S70;
+
+trans A57_II
+  in  S71
+  out S74;

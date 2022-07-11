@@ -1,0 +1,365 @@
+place GLOBAL_START init 1;
+place GLOBAL_END;
+place Client_got_blank_travel_permit;
+place Client_has_no_travel_permit;
+place Permit_received_not_in_time;
+place filled_out_permit_by_client;
+place Notification_send;
+place Permit_is_not_filled_out_properly;
+place Business_trip;
+place Trip_does_not_include_one_or_more_flights;
+place Client_got_request;
+place private_trip;
+place Client_has_travel_permit;
+place Costs_determined;
+place Missing_information_filled_out;
+place file_closed;
+place Appointment_is_made;
+place Trip_is_business_combined_with_private;
+place Schedule_approved;
+place Total_costs_deducted_from_budget;
+place Permit_is_filed;
+place information_registered;
+place File_is_copied;
+place Permit_is_filled_out_properly;
+place Copy_send_to_finance_department;
+place Start;
+place Toestand1;
+place Flight_schedule_is_prepared;
+place Trip_cancelled;
+place Schedule_disapproved;
+place Client_still_wants_to_make_the_trip;
+place Tickets_printed;
+place Private_trip;
+place Tickets_send_to_travel_agency;
+place Trip_includes_one_or_more_flights;
+place Trip_paid;
+place Balance_settled;
+place Client_doesn_t_want_to_make_the_trip;
+place Trip_paid_2;
+place Everything_collected;
+place Toestand;
+place All_documents_are_put_in_folder;
+place Hotels_booked;
+place too_late;
+place Reservations_made;
+place Trip_is_just_business;
+place Vouchers_printed;
+place Client_is_not_approved_to_make_business_trip;
+place Status;
+place private_trip_2;
+place everything_read_in_time;
+place Result_approved;
+place Client_is_not_allowed_to_make_business_trip;
+place Client_is_called;
+place Client_is_approved_to_make_business_trip;
+place business_trip;
+place memo_of_send_to_travel_agency;
+place Cash_and_travel_cheques_are_prepared;
+place Relevant_information_send;
+place Request_is_send_to_in_house_bank;
+place Cash_and_travel_cheques_are_send_to_travel_agency;
+place Balance_calculated;
+place Result_not_approved;
+place business_trip_2;
+place Costs_of_business_flight_is_determined;
+place Client_is_allowed_to_make_business_trip;
+place Relevant_information_is_send;
+place Actual_payment_flight_done;
+place information_about_total_amount_of_money_spend;
+place Advanced_payment_done;
+place Toestand2;
+place memo_of_approval_send;
+place cash_and_cheques_are_send_to_travel_agency;
+place Corrections_made;
+
+trans Give_blank_travel_permit_to_client
+  in  Client_has_no_travel_permit
+  out Client_got_blank_travel_permit;
+
+trans Client_fills_out_blank_permit
+  in  Client_got_blank_travel_permit
+  out filled_out_permit_by_client;
+
+trans verstrijken_deadline
+  in  filled_out_permit_by_client
+  out Permit_received_not_in_time;
+
+trans Send_notification
+  in  Permit_received_not_in_time
+  out Notification_send;
+
+trans OR_split_check_if_client_has_travel_permit_I
+  in  Business_trip
+  out Client_has_no_travel_permit;
+
+trans receive_filled_out_permit_in_time
+  in  filled_out_permit_by_client
+  out Client_has_travel_permit;
+
+trans deadline_past
+  in  Missing_information_filled_out
+  out Permit_received_not_in_time;
+
+trans OR_split_Check_permit_is_properly_filled_out_I
+  in  Client_has_travel_permit
+  out Permit_is_not_filled_out_properly;
+
+trans Request_for_missing_information
+  in  Permit_is_not_filled_out_properly
+  out Client_got_request;
+
+trans Fill_out_missing_information
+  in  Client_got_request
+  out Missing_information_filled_out;
+
+trans receive_missing_information_in_time
+  in  Missing_information_filled_out;
+
+trans OR_split_check_if_client_has_travel_permit_II
+  in  Business_trip
+  out Client_has_travel_permit;
+
+trans OR_split_is_trip_private_or_business_I
+  in  Schedule_approved, Trip_does_not_include_one_or_more_flights
+  out private_trip;
+
+trans Determine_cost_of_private_trip
+  in  private_trip, Trip_is_business_combined_with_private
+  out Costs_determined;
+
+trans Make_appointment_with_client_to_pay
+  in  Costs_determined
+  out Appointment_is_made;
+
+trans Death
+  in  file_closed
+  out GLOBAL_END;
+
+trans close_file
+  in  Notification_send, Trip_cancelled, too_late, private_trip_2, Total_costs_deducted_from_budget
+  out file_closed;
+
+trans OR_split_Check_permit_is_properly_filled_out_II
+  in  Client_has_travel_permit
+  out Permit_is_filled_out_properly;
+
+trans or_split_tussen_private_en_business_trip_II
+  in  information_registered
+  out Business_trip;
+
+trans OR_split_call_client_to_approve_flight_schedule_I
+  in  Flight_schedule_is_prepared
+  out Schedule_approved;
+
+trans OR_split_is_trip_private_or_business_II
+  in  Schedule_approved, Trip_does_not_include_one_or_more_flights
+  out business_trip;
+
+trans Send_copy_to_finance_department
+  in  File_is_copied
+  out Copy_send_to_finance_department;
+
+trans And_split
+  in  Copy_send_to_finance_department
+  out Toestand1, Status;
+
+trans OR_split_Does_trip_involve_one_or_more_flights_I
+  in  Toestand1, Private_trip
+  out Trip_does_not_include_one_or_more_flights;
+
+trans Birth
+  in  GLOBAL_START
+  out Start;
+
+trans register_information
+  in  Start
+  out information_registered;
+
+trans File_permit
+  in  Permit_is_filled_out_properly
+  out Permit_is_filed;
+
+trans Copy_file
+  in  Permit_is_filed
+  out File_is_copied;
+
+trans OR_split_call_client_to_approve_flight_schedule_II
+  in  Flight_schedule_is_prepared
+  out Schedule_disapproved;
+
+trans Deduct_total_cost_of_trip_from_travel_budget_of_faculty
+  in  Balance_settled
+  out Total_costs_deducted_from_budget;
+
+trans Cancel_trip
+  in  Client_doesn_t_want_to_make_the_trip
+  out Trip_cancelled;
+
+trans Prepare_flight_schedule
+  in  Trip_includes_one_or_more_flights, Schedule_disapproved
+  out Flight_schedule_is_prepared;
+
+trans OR_split_Does_trip_involve_in_one_or_more_flights_II
+  in  Toestand1, Private_trip
+  out Trip_includes_one_or_more_flights;
+
+trans Print_tickets_by_central_office
+  in  Trip_paid, Trip_is_just_business
+  out Tickets_printed;
+
+trans Send_tickets_from_central_office_to_travel_agency
+  in  Tickets_printed
+  out Tickets_send_to_travel_agency;
+
+trans or_split_tussen_private_en_business_trip_I
+  in  information_registered
+  out Private_trip;
+
+trans Client_pais_trip
+  in  Appointment_is_made, Client_still_wants_to_make_the_trip
+  out Trip_paid, Trip_paid_2;
+
+trans OR_split_ask_client_if_trip_is_business_combined_with_orivate_or_just_business_I
+  in  Toestand
+  out Trip_is_business_combined_with_private;
+
+trans And_join_collecting_cash_and_cheques_and_flight_tickets
+  in  Vouchers_printed, Tickets_send_to_travel_agency, Cash_and_travel_cheques_are_send_to_travel_agency
+  out Everything_collected;
+
+trans Put_all_documents_together_in_a_handy_folder
+  in  Everything_collected
+  out All_documents_are_put_in_folder;
+
+trans folder_not_ready_in_time
+  in  All_documents_are_put_in_folder
+  out too_late;
+
+trans Settle_balance_with_salary
+  in  Result_approved
+  out Balance_settled;
+
+trans Book_hotels
+  in  Trip_is_just_business, Trip_paid_2
+  out Hotels_booked;
+
+trans Make_reservations_for_local_transportation
+  in  Hotels_booked
+  out Reservations_made;
+
+trans Print_vouchers
+  in  Reservations_made
+  out Vouchers_printed;
+
+trans OR_split_ask_client_if_trip_is_business_combined_with_private_or_just_business_II
+  in  Toestand
+  out Trip_is_just_business;
+
+trans OR_split_Does_client_still_want_to_make_the_trip_II
+  in  Client_is_called
+  out Client_doesn_t_want_to_make_the_trip;
+
+trans Send_memo_to_travel_agency_to_notify_that_cleint_is_approved_to_maken_business_trip
+  in  Client_is_not_approved_to_make_business_trip
+  out memo_of_send_to_travel_agency;
+
+trans OR_split_Check_if_client_if_approved_to_make_business_trip_I
+  in  Status
+  out Client_is_not_approved_to_make_business_trip;
+
+trans everything_is_ready_at_least_three_working_days_before_trip_starts
+  in  All_documents_are_put_in_folder
+  out everything_read_in_time;
+
+trans OR_split_private_trip_or_business_trip_I
+  in  everything_read_in_time
+  out private_trip_2;
+
+trans Call_client_to_explain_problem
+  in  Client_is_not_allowed_to_make_business_trip
+  out Client_is_called;
+
+trans OR_split_Does_client_still_want_to_make_the_trip_I
+  in  Client_is_called
+  out Client_still_wants_to_make_the_trip;
+
+trans OR_split_Check_if_client_if_approved_to_make_business_trip_II
+  in  Status
+  out Client_is_approved_to_make_business_trip;
+
+trans And_join_OR_split_is_client_allowed_to_make_business_trip_I
+  in  business_trip, memo_of_send_to_travel_agency
+  out Client_is_not_allowed_to_make_business_trip;
+
+trans OR_split_Approve_result_I
+  in  Balance_calculated
+  out Result_approved;
+
+trans OR_split_private_trip_or_business_trip_II
+  in  everything_read_in_time
+  out business_trip_2;
+
+trans send_memo_to_travel_agency
+  in  Client_is_approved_to_make_business_trip
+  out memo_of_send_to_travel_agency, memo_of_approval_send;
+
+trans Prepare_cash_and_travel_cheques
+  in  Request_is_send_to_in_house_bank
+  out Cash_and_travel_cheques_are_prepared;
+
+trans Send_cash_and_travel_cheques_to_travel_agency
+  in  Cash_and_travel_cheques_are_prepared
+  out cash_and_cheques_are_send_to_travel_agency, Cash_and_travel_cheques_are_send_to_travel_agency;
+
+trans Send_request_to_in_house_bank_to_prepare_cash_and_travel_cheques
+  in  Relevant_information_send
+  out Toestand, Request_is_send_to_in_house_bank;
+
+trans And_join_OR_split_is_client_allowed_to_make_business_trip_II
+  in  business_trip, memo_of_send_to_travel_agency
+  out Client_is_allowed_to_make_business_trip;
+
+trans OR_split_Approve_result_II
+  in  Balance_calculated
+  out Result_not_approved;
+
+trans Process_information_about_total_amount_of_money
+  in  business_trip_2, cash_and_cheques_are_send_to_travel_agency
+  out information_about_total_amount_of_money_spend;
+
+trans Process_declaration
+  in  information_about_total_amount_of_money_spend, Actual_payment_flight_done
+  out Toestand2;
+
+trans Send_relevant_information
+  in  Costs_of_business_flight_is_determined
+  out Relevant_information_send, Relevant_information_is_send;
+
+trans Determine_costs_of_business_trip
+  in  Client_is_allowed_to_make_business_trip
+  out Costs_of_business_flight_is_determined;
+
+trans Make_actual_payment_of_flight
+  in  Advanced_payment_done
+  out Actual_payment_flight_done;
+
+trans And_join_Make_adevanced_payment_on_bank_account_of_client__registration_fees_included_
+  in  memo_of_approval_send, Relevant_information_is_send
+  out Advanced_payment_done;
+
+trans Make_corrections
+  in  Result_not_approved
+  out Corrections_made;
+
+trans Calculate_balance
+  in  Toestand2, Corrections_made
+  out Balance_calculated;
+
+trans process_declaration
+  in  information_about_total_amount_of_money_spend, Actual_payment_flight_done
+  out Toestand2;
+
+trans Process_information_about_total_amount_of_money_spend
+  in  cash_and_cheques_are_send_to_travel_agency, business_trip_2
+  out information_about_total_amount_of_money_spend;
