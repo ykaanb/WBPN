@@ -2,12 +2,24 @@
 Web-based Petri net visualizer 
 
 To run the app on your system:
-(For more detailed information you can refer to the visual studio code tutorial :
+(For detailed information you can refer to the visual studio code tutorial :
 https://code.visualstudio.com/docs/python/tutorial-flask )
 
 1) Install a version of Python 3.10 (recommended 3.10.5)
-2) Download the WBPN project
-3) Inside the project directory create a virtual environment named .venv :
+2) Download and install Graphviz on your system 
+
+   Using Graphviz requires 2 steps:
+   
+   1) Download and install Graphviz from https://www.graphviz.org/
+   
+   After installing Graphviz, make sure that the directory containing the dot executable (bin/ subdirectory) is on your systems' PATH 
+   
+   2) Installing the graphviz python package with pip install graphviz (this is done in step 6)
+   
+   (For detailed information you can refer to https://pypi.org/project/graphviz/)
+
+3) Download the WBPN project
+4) Inside the project directory create a virtual environment named .venv :
 
    #Windows
    
@@ -17,7 +29,7 @@ https://code.visualstudio.com/docs/python/tutorial-flask )
    
    python3 -m venv .venv
    
-4) Activate the virtual environment .venv:
+5) Activate the virtual environment .venv:
 
    #Windows
    
@@ -27,7 +39,7 @@ https://code.visualstudio.com/docs/python/tutorial-flask )
    
     source .venv/bin/activate
     
-5) Upgrade pip and install required packages within the activated environment:
+6) Upgrade pip and install required packages within the activated environment:
 
    python -m pip install --upgrade pip
    
@@ -41,7 +53,7 @@ https://code.visualstudio.com/docs/python/tutorial-flask )
    
    pip install -U jsonpickle
    
-6) Run the app within the activated environment:
+7) Run the app within the activated environment:
    
    flask run
 
