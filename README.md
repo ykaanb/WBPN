@@ -2,6 +2,7 @@
 Web-based Petri net visualizer 
 
 To run the app on your system:
+
 (For detailed information you can refer to the visual studio code tutorial :
 https://code.visualstudio.com/docs/python/tutorial-flask )
 
