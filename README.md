@@ -52,7 +52,7 @@ https://code.visualstudio.com/docs/python/tutorial-flask )
    
    pip install Flask-Assets
    
-   pip install -U jsonpickle
+   pip install jsonpickle
    
 7) Run the app within the activated environment:
    
