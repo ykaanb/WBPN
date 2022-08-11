@@ -88,23 +88,61 @@ def parse_tpn(Line = []):
             elif f[x] == "out":
                 find_out=x+1
         
-        for x in range(find_t,find_in-1):
-            if f[x]!="":
-                find_t=x
+        if find_in!=0 and find_out!=0: 
+            for x in range(find_t,find_in-1):
+                if f[x]!="":
+                    find_t=x
 
-        trans["t"+str(ti)]=f[find_t]
+            trans["t"+str(ti)]=f[find_t]
 
-        for x in range(find_in,find_out-1):
-            if f[x]!="":
-             input["in"+str(ni)]={ "from_p" : f[x] , "to_t" : trans["t"+str(ti)] }
-             ni+=1
+            for x in range(find_in,find_out-1):
+                if f[x]!="":
+                    input["in"+str(ni)]={ "from_p" : f[x] , "to_t" : trans["t"+str(ti)] }
+                    ni+=1
 
-        for x in range(find_out,len(f)):
-            if f[x]!="":
-             output["out"+str(oi)]={ "to_p" : f[x] , "from_t" : trans["t"+str(ti)] } 
-             oi+=1        
+            for x in range(find_out,len(f)):
+                if f[x]!="":
+                    output["out"+str(oi)]={ "to_p" : f[x] , "from_t" : trans["t"+str(ti)] } 
+                    oi+=1        
 
-        ti+=1
+            ti+=1
+        #If no input 
+        elif find_in==0 and find_out!=0:
+            for x in range(find_t,find_out-1):
+                if f[x]!="":
+                    find_t=x
+
+            trans["t"+str(ti)]=f[find_t]
+
+            for x in range(find_out,len(f)):
+                if f[x]!="":
+                    output["out"+str(oi)]={ "to_p" : f[x] , "from_t" : trans["t"+str(ti)] } 
+                    oi+=1        
+
+            ti+=1
+        #If no output
+        elif find_in!=0 and find_out==0:
+            for x in range(find_t,find_in-1):
+                if f[x]!="":
+                    find_t=x
+
+            trans["t"+str(ti)]=f[find_t]
+
+            for x in range(find_in,len(f)):
+                if f[x]!="":
+                    input["in"+str(ni)]={ "from_p" : f[x] , "to_t" : trans["t"+str(ti)] }
+                    ni+=1
+            
+            ti+=1
+        #if no input and no output
+        elif find_in==0 and find_out==0:
+            for x in range(find_t,len(f)):
+                if f[x]!="":
+                    find_t=x
+
+            trans["t"+str(ti)]=f[find_t]
+
+            ti+=1
 
 
  #----------Changing the data collected into the object oriented Petri net format-----------
