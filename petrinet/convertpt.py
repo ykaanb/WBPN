@@ -57,36 +57,74 @@ def convert(bpmnelemlist, seqflow):
                         edge_counter+=1
                 case "e":
                     # create end place (if multiple sources xor_join, bind incomings to silent t )
-                    place = pt.Place()
-                    place.id = "p" + str(place_counter)
-                    place.name = element.name
-                    net.places[place.id] = place
+                    endplace = pt.Place()
+                    endplace.id = "p" + str(place_counter)
+                    endplace.name = element.name
+                    net.places[endplace.id] = endplace
                     place_counter+=1
-                    # create silent transition for end place
-                    transition = pt.Transition()
-                    transition.id = "t" + str(transition_counter)
-                    transition.name = "silent transition"
-                    net.transitions[transition.id] = transition
+                    # create end transition 
+                    endtransition = pt.Transition()
+                    endtransition.id = "t" + str(transition_counter)
+                    endtransition.name = "silent transition"
+                    net.transitions[endtransition.id] = endtransition
                     transition_counter+=1
-                    #create the edges from seqflows to t
+                    #xor_join behaviour , create for each incoming a silent transition then create a single silent place and bind them 
+                    silent_t=[]
                     for source in element.incoming:
+                        #create silent transitions for incomings 
+                        silt = pt.Transition()
+                        silt.id = "t" + str(transition_counter)
+                        silt.name = "silent transition"
+                        net.transitions[silt.id] = silt
+                        silent_t.append(silt)
+                        transition_counter+=1
+                        #bind incomings to the respective silent t
+                        
                         edge=pt.Edge()
                         edge.id=edge_counter
-                        edge.name= source + "-to-" + transition.id
+                        edge.name= source + "-to-" + silt.id
                         edge.input= source
-                        edge.output= transition.id  
+                        edge.output= silt.id  
                         
                         net.edges.append(edge)
                         edge_counter+=1
-                    #bind transition to endplace
+
+                    #create a silent place to connect silent transitions to 
+                    place=pt.Place()
+                    place.id="p"+ str(place_counter)
+                    place.name="silent place" 
+                    net.places[place.id]=place
+                    place_counter+=1
+
+                    #bind the silent transitions to the above silent place
+                    for s_t in silent_t:
+                        edge=pt.Edge()
+                        edge.id=edge_counter
+                        edge.name= s_t.id + "-to-" + place.id
+                        edge.input= s_t.id
+                        edge.output= place.id  
+                        
+                        net.edges.append(edge)
+                        edge_counter+=1
+                    #bind the silent place to the end transition
                     edge=pt.Edge()
                     edge.id=edge_counter
-                    edge.name= transition.id + "-to-" + place.id
-                    edge.input= transition.id
-                    edge.output= place.id  
+                    edge.name=place.id + "-to-" + endtransition.id
+                    edge.input=place.id
+                    edge.output=endtransition.id
                     
                     net.edges.append(edge)
                     edge_counter+=1
+                    #bind the endtransition to the endplace
+                    edge=pt.Edge()
+                    edge.id=edge_counter
+                    edge.name= endtransition.id + "-to-" + endplace.id
+                    edge.input=endtransition.id
+                    edge.output=endplace.id
+                    
+                    net.edges.append(edge)
+                    edge_counter+=1
+
                 #intermediate events and tasks
                 case ("interCatch"|"interThrow"|"t"|"sendT"|"receiveT"|"userT"|
                      "manualT"|"serviceT"|"scriptT"):
